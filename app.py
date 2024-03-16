@@ -43,6 +43,10 @@ class App(object):
             if event.key == pygame.K_g:
                 self.bullets.append(Bullet((self.tank.x, self.tank.y), self, self.tank.rotate, self.tank))
 
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if event.button == 1:
+                print(self.grid.globloc(event.pos[0], event.pos[1]))
+
     def input(self):  # метод, который проверяет нажатие клавиш
         for obj in self.objects:
             obj.input(pygame.key.get_pressed())

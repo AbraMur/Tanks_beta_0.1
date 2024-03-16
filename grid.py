@@ -41,11 +41,10 @@ class Grid(object):
                                                  numbers_height_grid * 2)), \
                                     heights[i][j]
 
-    def globloc(self):
-        for i in range(width + 1):
-            for j in range(height + 1):
-                # self.grid[(i, j)] =
-                pass
+    def globloc(self, glob_x, glob_y):  # переводим глобальные координаты в локальные
+        loc_x = int(glob_x / width * numbers_width_grid)
+        loc_y = int(glob_y / width * numbers_height_grid)
+        return loc_x, loc_y
 
     def generate_perlin_noise(self, seed):  # метод генерации высот
         # генерация основного шума и параметризация
