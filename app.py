@@ -20,10 +20,9 @@ class App(object):
         self.grid.create_perlin_map()
         self.grid_dict = self.grid.get()
 
-        self.rect = Rect()  # переменная класса rect
+        # self.rect = Rect()  # переменная класса rect
 
         self.tank = Tank(self, (100, 100))  # экземпляр танка
-        self.tank_box = self.rect.collision_pos((100, 100), config.tank_width, config.tank_height)  # получаем точки танка
         self.objects.append(self.tank)  # добавляет объект танк в список
 
         self.bullets = []  # список выпущенных снарядов
@@ -62,6 +61,9 @@ class App(object):
             self.border_map()
             self.update(dt)
             self.draw()
+
+    def collision(self, position,  grid):
+        pass
 
     def border_map(self):  # метод, в котором проверяется выход снаряда за карту
         for bull in self.bullets:

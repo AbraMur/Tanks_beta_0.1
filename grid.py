@@ -41,6 +41,9 @@ class Grid(object):
                                                  numbers_height_grid * 2)), \
                                     heights[i][j]
 
+    def collide(self, rect: 'Rect') -> bool:
+        return True
+
     def globloc(self, glob_x, glob_y):  # переводим глобальные координаты в локальные
         loc_x = int(glob_x / width * numbers_width_grid)
         loc_y = int(glob_y / width * numbers_height_grid)

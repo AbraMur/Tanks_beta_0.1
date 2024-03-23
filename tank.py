@@ -1,11 +1,17 @@
 import math
 import pygame
+import config
+from rect import Rect
 
 
 # класс, отвечающий за все, что связано с танком (анимации, движение и т.п.)
 class Tank:
     def __init__(self, app, pos):  # метод инициализации танка
         self.x, self.y = pos  # позиция танка
+
+        self.rect = Rect(pos, config.tank_width, config.tank_height, 0)
+
+        self.app = app
 
         self.angle = 0  # угол поворота
         self.vel = 0  # текущая скорость
@@ -64,6 +70,10 @@ class Tank:
 
     def reduce_speed(self):  # метод, отвечающий за инерцию
         self.vel = max(self.vel - self.acceleration * 2, 0)
+
+    def local_tank_position(self, grid):
+        self.loc_x, self.loc_y = self.grid.globloc(self.x, self.y)
+        tank_pos = self.rect.collision_pos((self.loc_x, self.loc_y), config.tank_width, config.tank_height)
 
     def draw(self, screen):  # метод отрисовки танка
         rotated_img = pygame.transform.rotate(self.base_image, self.angle)
