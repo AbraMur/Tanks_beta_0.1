@@ -22,7 +22,7 @@ class App(object):
 
         # self.rect = Rect()  # переменная класса rect
 
-        self.tank = Tank(self, (100, 100))  # экземпляр танка
+        self.tank = Tank(self, (100, 100), self.grid)  # экземпляр танка
         self.objects.append(self.tank)  # добавляет объект танк в список
 
         self.bullets = []  # список выпущенных снарядов
@@ -58,12 +58,17 @@ class App(object):
             dt = self.clock.tick(config.FPS)/1000  # вычисляем delta time
 
             self.input()
+            self.collision(self.tank.local_tank_position())
             self.border_map()
             self.update(dt)
             self.draw()
 
-    def collision(self, position,  grid):
-        pass
+    def collision(self, position):
+        pos_topleft = position[0]
+        pos_topright = position[1]
+        pos_botleft = position[2]
+        pos_botright = position[3]
+        print(pos_topleft, pos_topright, pos_botleft, pos_botright)
 
     def border_map(self):  # метод, в котором проверяется выход снаряда за карту
         for bull in self.bullets:
