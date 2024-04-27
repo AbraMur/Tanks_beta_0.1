@@ -17,7 +17,7 @@ class App(object):
 
         self.grid = Grid()  # переменная класса сетки
         self.objects.append(self.grid)  # добавляет объект сетка в список
-        self.grid.create_perlin_map()
+        self.grid_one = self.grid.create_perlin_map()  # создаем сетку и генерируем высоты
         self.grid_dict = self.grid.get()
 
         # self.rect = Rect()  # переменная класса rect
@@ -63,12 +63,23 @@ class App(object):
             self.update(dt)
             self.draw()
 
-    def collision(self, position):
-        pos_topleft = position[0]
-        pos_topright = position[1]
-        pos_botleft = position[2]
-        pos_botright = position[3]
-        print(pos_topleft, pos_topright, pos_botleft, pos_botright)
+    def collision(self, position):  # метод вычисления коллизии
+        pos_topleft = position[0]  # верхняя левая точка
+        pos_topright = position[1]  # верхняя правая точка
+        pos_botleft = position[2]  # нижняя левая точка
+        pos_botright = position[3]  # нижняя правая точка
+
+        if self.grid.grid[pos_topleft][1] != 0:
+            self.tank.vel = 0
+
+        if self.grid.grid[pos_topright][1] != 0:
+            self.tank.vel = 0
+
+        if self.grid.grid[pos_botleft][1] != 0:
+            self.tank.vel = 0
+
+        if self.grid.grid[pos_botright][1] != 0:
+            self.tank.vel = 0
 
     def border_map(self):  # метод, в котором проверяется выход снаряда за карту
         for bull in self.bullets:
